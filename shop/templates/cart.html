@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+
+
+
+{% block content %}
+{%load static%}
+<div class="my-2">
+    <a class="btn btn-outline-dark" href="{% url 'prod' %}">&#9756; <strong> Continue Shopping</strong></a>
+</div>
+
+<div class="card text-center">
+    <div class="card-header">
+     <strong>Your Cart &#9787;</strong> 
+    </div>
+    <div class="card-body">
+      <table class="table">
+          <tr>
+          <th><h4>Items : <strong>{{order.get_cart_items}}</strong></h4></th>
+          <th><h4>Total: <strong> ₹ {{order.get_cart_total}}</strong></h4></th>
+          <th>
+
+              <a style="float: right; margin: 5px " class="btn btn-success" href="{% url 'checkout' %}">
+                Checkout
+              </a>
+          </th>
+          </tr>
+            
+      </table>
+    </div>
+    <div class="card-footer text-muted">
+      
+    </div>
+  </div>
+
+
+
+
+
+		
+
+{% endblock content %}
+
+
+
+{%block carts%}
+{% comment %} {% for item in items %} {% endcomment %}
+<div class="my-2">
+
+
+    <div class="card text-center">
+      <div class="card-header">
+       <strong><i>Details</i></strong>
+       </div>
+      {% for item in items %}
+      <div class="cart-row">
+      {% comment %} <div > {% endcomment %}
+        <table class="table">
+          <tr>
+              <th>
+              </th>
+              <th>Item</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Total</th>
+          </tr>
+          <tr>
+          
+          <td><img  class='row-image' src="/media/{{item.products.thumbnail}}"  border=3 height=100 width=100></img></td>
+          <td>{{item.products.name}}</td>
+          <td> ₹ {{item.products.price}}</td>
+          <td>{{item.quantity}}</td>
+          <td> <strong> ₹ {{item.get_total}} </strong></td>
+          </tr>
+        </table>
+      </div>
+      {% endfor %}
+  </div>  
+  {% comment %} {% endfor %}  {% endcomment %}
+  {%endblock carts%}

@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- styling for carousel -->
+<style>
+
+  .carousel-item{
+      height:26rem;    
+      background: #000;
+      color: white;
+      position: relative;
+      background-position: center;
+      background-size: cover;
+  }
+  .overlay-image{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    background-position: center;
+    background-size: cover;
+    opacity: 0.4;
+  }
+
+ </style>
+
+<!-- carousel making -->
+<div id="myCarousel" class="carousel slide carousel-fade my-2" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2" class=""></button>
+    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3" class="active" aria-current="true"></button>
+  </div>
+  <div class="carousel-inner" style="height:400px !important;">
+    <div class="carousel-item" data-interval="1000">
+        <div class="overlay-image" style="background-image: url(./static/lap.jpg);"></div>
+      <!-- <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"></rect></svg> -->
+
+      <div class="container">
+        <div class="carousel-caption text-start">
+          <h1>Dell Laptops</h1>
+          <p>Technology has allowed people to make records really cheap. You can make a record on a laptop.
+            </p>
+          <p><a class="btn btn-lg btn-secondary" href="#">view more</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item" data-interval="1000">
+      <div class="overlay-image" style="background-image: url(./static/iphonee.jpg);"></div>
+      <!-- <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"></rect></svg> -->
+
+      <div class="container">
+        <div class="carousel-caption">
+          <h1>iPhone - Apple (IN)</h1>
+          <p>Explore iPhone, the world's most powerful personal device. Check out new iPhone 12 Pro, iPhone 12 Pro Max, iPhone 12, iPhone 12 mini, and iPhone SE.</p>
+          <p><a class="btn btn-lg btn-secondary" href="#">view more</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item active" data-interval="1000">
+      <div class="overlay-image" style="background-image: url(./static/tv.jpg);"></div>
+      <!-- <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"></rect></svg> -->
+
+      <div class="container">
+        <div class="carousel-caption text-end">
+          <h1>Samsung Smart TV Range</h1>
+          <p>Select from a wide range of New Samsung Smart TVs like Model T5770 & T5500 (43 Inch), Model T4750, T4700, T4550 & T4500(32 Inch) Display & more.</p>
+          <p><a class="btn btn-lg btn-secondary " href="#">view more</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+
+
+
+<div class="container" style="text-align: center;">
+<!-- our product view -->
+<div class="row my-2" >
+{% for item in myprod %}
+
+    <div class="col-md-6 ">
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static box-element item">
+          <strong class="d-inline-block mb-2 text-primary">{{item.name}}</strong>
+          
+          <strong >Price : ₹{{item.price|floatformat}}</strong><br>
+          <p class="card-text mb-auto">{{item.desc | truncatechars:50}}
+          <a href="" class="stretched-link">see more...</a></p>
+          <div class="d-flex justify-content-between align-items-center">
+          <div class="btn-group">
+            <a href="{% url 'buy' item.id%}" class="stretched-link">
+              <button  type="button"  class="btn btn-success">Buy Now</button>
+            </a>
+            
+          </div> 
+          <button data-product={{item.id}} data-action="add " class="btn btn-dark add-btn update-cart">
+            Add to Cart
+          </button>
+          </div>
+
+        </div>
+        <div class="col-auto d-none d-lg-block">
+          <img src="/media/{{item.thumbnail}}" class="bd-placeholder-img" width="200" height="250"  role="img" aria-label="Placeholder: Thumbnail"/> 
+          
+
+        </div>
+        
+      </div>
+    </div>
+{% if forloop.counter|divisibleby:2 %}
+      </div> <div class="row my-2" >
+      {% endif %}   
+  
+{% endfor %}
+</div>
+</div>
+{% endblock content %}
+
+
+
+

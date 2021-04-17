@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  
+
+
+	
+
+<div class="row">
+	{% for item in myprod %}
+	<div class=" col-lg-4">
+		<img src="/media/{{item.thumbnail}}" class="thumbnail" /> 
+		<div class="box-element product">
+			<h6><strong>{{item.name}}</strong></h6>
+			<hr>
+
+			<button type="button"  class="btn btn-danger">Add to cart</button>
+			<a href="{% url 'buy' item.id%}">
+				<button  type="button"  class="btn btn-success">View</button>
+				</a>
+				<h4 style="display :inline-block; float:right"><strong>Price : ₹{{item.price}}</strong></h4>
+		</div>
+
+
+	</div>
+	{% endfor %}
+</div>	
+{% endblock content %}
