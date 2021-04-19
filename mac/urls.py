@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from shop.views import ProductsView , sendpaymentrequest,responsefrompaytm,aboutus,cart,checkout
+from shop.views import ProductsView , sendpaymentrequest,responsefrompaytm,aboutus,cart,checkout,updateItem
 from django.conf.urls.static import static
 from django.conf import settings
 
@@ -27,5 +27,8 @@ urlpatterns = [
     path('about',aboutus,name='about'),
     path('cart/',cart,name='cart'),
     path('checkout/',checkout,name='checkout'),
+    
+    path('update_item/',updateItem,name='update_item'),
+    
 
 ]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

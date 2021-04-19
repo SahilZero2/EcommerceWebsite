@@ -1,3 +1,5 @@
+ <!-- #############this is a testing template########### -->
+
 {% extends 'base.html' %}
 
 {% block content %}
@@ -87,11 +89,12 @@
 
 <div class="container" style="text-align: center;">
 <!-- our product view -->
+<div class="card-body">
 <div class="row my-2" >
 {% for item in myprod %}
 
     <div class="col-md-6 ">
-      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 ">
         <div class="col p-4 d-flex flex-column position-static box-element item">
           <strong class="d-inline-block mb-2 text-primary">{{item.name}}</strong>
           
@@ -99,15 +102,15 @@
           <p class="card-text mb-auto">{{item.desc | truncatechars:50}}
           <a href="" class="stretched-link">see more...</a></p>
           <div class="d-flex justify-content-between align-items-center">
-          <div class="btn-group">
-            <a href="{% url 'buy' item.id%}" class="stretched-link">
-              <button  type="button"  class="btn btn-success">Buy Now</button>
-            </a>
+              <div class="btn-group">
+                {% comment %} <a href="{% url 'buy' item.id%}" class="stretched-link">
+                  <button  type="button"  class="btn btn-outline-success">Buy Now</button>
+                </a>  {% endcomment %}
+                <button type="button" data-product="{{item.id}}" class="btn btn-outline-success cart add-btn update-cart" data-action='add'>Success</button>
+                  
             
-          </div> 
-          <button data-product={{item.id}} data-action="add " class="btn btn-dark add-btn update-cart">
-            Add to Cart
-          </button>
+                </div> 
+          
           </div>
 
         </div>
@@ -126,8 +129,46 @@
 {% endfor %}
 </div>
 </div>
+</div>
 {% endblock content %}
 
+{% block js %}
+<script >
+
+//find out the cart items from local storage
+if (localStorage.getItem('cart') == null){
+  var cart = {};
+}
+else{
+  cart = JSON.parse(localStorage.getItem('cart'));
+  document.getElementById('cart').innerHTML = Object.keys(cart).length;
+}
+//if the add to cart button is clicked , add/incriment the item
+$('.cart').click(function(){
+console.log('clicked');
+var idstr = this.id.toString();
+
+
+if (cart[idstr] != undefined){
+  cart[idstr] = cart[idstr] + 1;
+}
+else{
+  cart[idstr] = 1;
+}
+
+console.log(cart);
+
+localStorage.setItem('cart',JSON.stringify(cart));
+document.getElementById('cart').innerHTML = Object.keys(cart).length;
+});
+
+$('#popcart').popover();
+document.getElementById("popcart").setAttribute('data-content' , '<h5>cart</h5>' );
+
+</script>
+
+
+{% endblock js %}
 
 
 

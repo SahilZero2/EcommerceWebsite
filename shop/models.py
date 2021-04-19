@@ -25,10 +25,13 @@ class Products(models.Model):
 class Order(models.Model):
     customer = models.ForeignKey(Customer , on_delete=models.CASCADE)
     date_orderd = models.DateTimeField(auto_now_add=True)
+    
     transection_id = models.CharField( max_length=200)
+    
 
     def __str__(self):
         return str(self.id)
+    
 
     @property
     def get_cart_total(self):
@@ -49,6 +52,9 @@ class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     quantity =models.IntegerField(default=0)
     date_added = models.DateTimeField(auto_now_add=True)
+
+    
+    
 
     @property
     def get_total(self):
