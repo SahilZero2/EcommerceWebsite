@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 
 
@@ -11,7 +12,7 @@
 
 <div class="card text-center">
     <div class="card-header">
-     <strong>Your Cart &#9787;</strong> 
+     <strong>Your Cart &#128722;</strong> 
     </div>
     <div class="card-body">
       <table class="table">
@@ -44,6 +45,24 @@
 
 
 {%block carts%}
+<style>
+
+.quantity{
+  display: inline-block;
+  font-weight: 700;
+  padding-right: 10px;
+}
+.chg-quantity{
+  width: 14px;
+  cursor: 10px;
+  display: block;
+  margin-top: 15px;
+  transition: 1s;
+  
+  
+}
+
+</style>
 
 <div class="my-2">
 
@@ -71,7 +90,14 @@
           <td><img  class='row-image' src="/media/{{item.products.thumbnail}}"  border=3 height=100 width=100></img></td>
           <td> <b> <i class="text-primary"> {{item.products.name}} </i> </b></td>
           <td> ₹ {{item.products.price}}</td>
-          <td>{{item.quantity}}</td>
+          <div class="quantity">
+            <td class="quantity">{{item.quantity}}
+              
+                <img data-product="{{item.products.id}}" data-action="add" class="chg-quantity update-cart " src="{% static 'shop/upp.png' %}" >
+                <img data-product="{{item.products.id}}" data-action="remove" class="chg-quantity update-cart " src="{% static 'shop/downn.png' %}" >
+                <hr>
+            </td>
+          </div>
           <td> <strong> ₹ {{item.get_total}} </strong></td>
           </tr>
         

@@ -61,10 +61,22 @@ def responsefrompaytm(request):
 
 
 def aboutus(request):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer)
+        items = order.orderitem_set.all()
+    else:
+        items =[]
+        order = {'get_cart_total':0, 'get_cart_items':0 }
+    context = {'items' : items , 'order' : order}
+
     return render(
         request,
-        'about.html'
+        'about.html',
+        context
     )
+
+    
 
 
 def cart(request):
@@ -101,7 +113,7 @@ def checkout(request):
         context
     )
 
-
+# #########to add data in cart from home page
 def updateItem(request):
     data = json.loads(request.body)
     productId = data['productId']

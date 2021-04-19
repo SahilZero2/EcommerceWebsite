@@ -30,10 +30,10 @@
         }
         return cookieValue;
       }
-    var csrftoken = getToken('csrftoken');
+        var csrftoken = getToken('csrftoken');
 
 
-    </script>
+      </script>
 
   </head>
   <body>
@@ -48,7 +48,7 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{% url 'prod' %}">Home</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" >
           <a class="nav-link" href="{% url 'about' %}">About us</a>
         </li>
         
@@ -58,10 +58,10 @@
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
-      <a href="{% url 'cart' %}">
-      <button type="button" class="btn btn-secondary mx-2" id="popcart" data-container="body" data-bs-toggle="popover" data-placement="bottom" data-content="Bottom popover">
-        Cart(<span id=cart>{{order.get_cart_items}}</span>)&#128722;
-      </button>
+      <a href="{% url 'cart' %}" >
+        <button type="button" class="btn btn-secondary mx-2" id="popcart" data-container="body" data-bs-toggle="popover" data-placement="bottom" data-content="Bottom popover">
+          Cart<span id=cart> <b>({{order.get_cart_items}}</span>)&#128722;</b>
+        </button>
       </a>
     </div>
   </div>
@@ -93,7 +93,7 @@
 {%block js%}
 
 {% endblock js%}
-  {% comment %} <script type="text/javascript" src="{% static 'js/cart.js' %}"></script> {% endcomment %}
+  
 
   </body>
 </html>
